@@ -1,21 +1,9 @@
 <?php
-    class Modelo {
-        /* ------------- DATOS DE CONEXIÓN ------------- */
-        private $direccion = "localhost";
-	    private $usuario = "root";
-	    private $contraseña = "";
-	    private $bd = "torneo_ajedrez";
-
+	require "config/conexion.php";
+    class Modelo extends Conexion{
         /* ------------- ESTABLECER CONEXIÓN CON LA BD ------------- */
-        private $conexion;
-		private $driver;
 		public function __construct(){
-			$this->conexion = new mysqli($this->direccion, $this->usuario, $this->contraseña, $this->bd);
-			$this->driver = new mysqli_driver();
-			$this->driver->report_mode = MYSQLI_REPORT_OFF;
-		}
-		public function __destruct(){
-			$this->conexion->close();
+			parent::__construct();
 		}
 
         /* ----------------- FUNCIONES DEL MODELO --------------------- */
@@ -40,13 +28,18 @@
 
 
 		public function modificarProfesores($nombres) {
+			$todoOK = true;
 			$idProfesor = 1;
 			foreach($nombres as $nombre){
 				$sql = "UPDATE profesores SET nombre = '".$nombre."' WHERE idProfesor = ".$idProfesor.";";
 				/* echo $sql; */
 				$resultado = $this->conexion->query($sql);
 				$idProfesor++;
+				if (!$resultado) {
+        			$todoOK = false;
+    			}
 			}
+			return $todoOK;
 		}
     }
 ?>
