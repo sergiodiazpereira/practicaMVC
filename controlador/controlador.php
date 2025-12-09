@@ -34,11 +34,12 @@
                     $datosProfesores = $this->modelo->datosProfesores();
                     return $datosProfesores;
                 } else {
-                    return "error";
+                    header("Location: errorBaseDatos.php");
                 }
 
             } catch (Exception $e) {
-                echo $e->getMessage() . ", <a href='modificarProfesores.php'>vuelve al formulario de modificación</a>";
+                // $mensaje = $e->getMessage(); solo se podria pasar $mensaje por URL con $GET?? (errorModificacion.php?m='".$mensaje."')
+                header("Location: errorModificacionProfesores.php");
             }
         }
     }

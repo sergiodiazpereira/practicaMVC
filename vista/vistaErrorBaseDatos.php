@@ -3,7 +3,7 @@
         <title>Datos usuario</title>
     </head>
     <body>
-        <p>Has quedado campos de nombres vacíos</p><br/>
+        <p>No se han actualizado todos los campos de la base de datos</p><br/>
         <a href="modificarProfesores.php">Volver a la pagina de modificaciones</a>
     </body>
 </html>
